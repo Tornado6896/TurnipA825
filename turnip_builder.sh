@@ -61,9 +61,7 @@ prepare_workdir(){
 }
 
 build_lib_for_android(){
-	echo "==== Сборка Mesa на ветке $1 ===="
-	git checkout origin/$1
-
+	
 	# Настройка окружения для использования Clang из NDK
 	mkdir -p "$workdir/bin"
 	ln -sf "$ndk/clang" "$workdir/bin/cc"
