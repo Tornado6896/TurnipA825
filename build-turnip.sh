@@ -29,7 +29,7 @@ deps="meson ninja patchelf unzip curl pip flex bison zip glslang"
 clear
 
 echo "Checking system for required dependencies..."
-
+	
 # Check for required dependencies 
 for deps_chk in $deps; do
 
@@ -70,9 +70,11 @@ echo "Extracting Android NDK..." $'\n'
 unzip "$ndkdir".zip &> /dev/null
 
 # Download Mesa source
-echo "Downloading Latest Mesa source ..." $'\n'
-curl $mesaver --output "$mesadir".zip &> /dev/null
-
+#echo "Downloading Latest Mesa source ..." $'\n'
+#curl $mesaver --output "$mesadir".zip &> /dev/null
+echo "Клонирование исходного кода Mesa..."
+	git clone $mesaver --depth=1 --no-single-branch $mesa26
+	cd $mesa26
 clear
 
 echo "Extracting Mesa source..." $'\n'
