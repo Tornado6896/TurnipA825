@@ -73,8 +73,8 @@ unzip "$ndkdir".zip &> /dev/null
 #echo "Downloading Latest Mesa source ..." $'\n'
 #curl $mesaver --output "$mesadir".zip &> /dev/null
 echo "Клонирование исходного кода Mesa..."
-git clone $mesaver --depth=1 --no-single-branch $mesadir
-clear
+git clone $mesaver --depth=1 --no-single-branch $mesadir &> /dev/null
+#clear
 
 #echo "Extracting Mesa source..." $'\n'
 #unzip "$mesadir".zip &> /dev/null
