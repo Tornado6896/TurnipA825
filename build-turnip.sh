@@ -11,8 +11,8 @@ ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
 sdkver="34"
 
 # Define Mesa version and download URL
-mesadir="mesa-mesa-26.0.3"
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-26.0.3/mesa-mesa-26.0.3.zip?ref_type=tags"
+mesadir="mesa26"
+mesaver="https://github.com/Tornado6896/MESA26.git"
 
 # Define working directories
 workdir="$(pwd)/turnip_workdir"         # Base directory for all operations
@@ -21,7 +21,7 @@ magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
 DRIVER_FILE="vulkan.turnip.so"          # Output Vulkan Driver (emulator)
 META_FILE="meta.json"                   # Metadata
 
-ZIP_FILE_MAGISK="Turnip-26.0.3-MAGISK-KSU.zip"
+#ZIP_FILE_MAGISK="Turnip-26.0.3-MAGISK-KSU.zip"
 ZIP_FILE_EMULATOR="Turnip-26-0.3-EMULATOR.zip" 
 
 # List of required packages to build the Turnip driver
@@ -166,6 +166,7 @@ if ! [ -a libvulkan_freedreno.so ]; then
     echo -e "$red Build failed! libvulkan_freedreno.so not found $nocolor" && exit 1
 fi
 
+<< 'MULTILINE-COMMENT'
 echo "Prepare magisk module structure..." $'\n'
 p1="system/vendor/lib64/hw"
 mkdir -p "$magiskdir/$p1"
@@ -292,15 +293,16 @@ ui_print "BY: @VEKT0R_87"
 ui_print ""
 EOF
 
-echo "Packing driver files into Magisk/KSU module ..." $'\n'
+#echo "Packing driver files into Magisk/KSU module ..." $'\n'
 
-zip -r "$workdir/$ZIP_FILE_MAGISK" * &> /dev/null
+#zip -r "$workdir/$ZIP_FILE_MAGISK" * &> /dev/null
 
-if [[ ! -f "$workdir/$ZIP_FILE_MAGISK" ]]; then
-    echo -e "${red}Error: Zipping driver files failed.${nocolor}"
-    exit 1
-else
-    clear
+#if [[ ! -f "$workdir/$ZIP_FILE_MAGISK" ]]; then
+    #echo -e "${red}Error: Zipping driver files failed.${nocolor}"
+    #exit 1
+#else
+   # clear
+MULTILINE-COMMENT
 
     echo " Its time to create Turnip build for EMULATOR"
 
@@ -316,7 +318,7 @@ else
   "schemaVersion": 1,
   "name": "Freedreno Turnip Driver 26.0.0",
   "description": "Compiled using Android NDK 30",
-  "author": "v3kt0r-87",
+  "author": "Tornado6896",
   "packageVersion": "3",
   "vendor": "Mesa3D",
   "driverVersion": "Vulkan 1.4",
