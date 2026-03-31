@@ -143,22 +143,23 @@ EOF
 
 echo "Generating build files..." $'\n'
 cd $mesadir
-meson build-android-aarch64 
---cross-file android-aarch64 -Dbuildtype=release -Dplatforms=android -Dplatform-sdk-version=31 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kgsl=true -Db_lto=true
-#CC=clang CXX=clang++ meson setup build-android-aarch64 \
+#meson build-android-aarch64 
+#--cross-file android-aarch64 -Dbuildtype=release -Dplatforms=android -Dplatform-sdk-version=31 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kgsl=true -Db_lto=true
+CC=clang CXX=clang++ meson setup build-android-aarch64 \
    # --cross-file "$workdir/$mesadir/android-aarch64.txt" \
-    #--native-file "$workdir/$mesadir/native.txt" \
-    #-Dbuildtype=release \
-   # -Dplatforms=android \
-    #-Dplatform-sdk-version="$sdkver" \
-   # -Dandroid-stub=true \
-   # -Dgallium-drivers= \
-   # -Dvulkan-drivers=freedreno \
-   # -Dfreedreno-kmds=kgsl \
-    #-Db_lto=true \
-    #-Db_lto_mode=thin \
-    #-Degl=disabled \
-    #-Dstrip=true &> $workdir/meson_log
+   --cross-file android-aarch64 \
+    --native-file "$workdir/$mesadir/native.txt" \
+    -Dbuildtype=release \
+    -Dplatforms=android \
+    -Dplatform-sdk-version="$sdkver" \
+    -Dandroid-stub=true \
+    -Dgallium-drivers= \
+    -Dvulkan-drivers=freedreno \
+    -Dfreedreno-kmds=true \
+    -Db_lto=true \
+    -Db_lto_mode=thin \
+    -Degl=disabled \
+    -Dstrip=true &> $workdir/meson_log
 
 # Compile build files using Ninja
 echo "Compiling build files..." $'\n'
