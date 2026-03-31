@@ -66,7 +66,7 @@ mkdir -p "$workdir" && cd "$_"
 #echo "Downloading Android NDK..." $'\n'
 #curl $ndkver --output "$ndkdir".zip &> /dev/null
 
-c#lear
+#lear
 
 #echo "Extracting Android NDK..." $'\n'
 #unzip "$ndkdir".zip &> /dev/null
