@@ -85,7 +85,7 @@ git clone $mesasrc $mesadir &> /dev/null
 cd $mesadir
 
 # Set NDK Clang bin directory
-ndk_bin="$workdir/$ndkdir/toolchains/llvm/prebuilt/linux-x86_64/bin"
+ndk_bin="$ndkdir/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
 # Set toolchain variables
 export CC=clang
