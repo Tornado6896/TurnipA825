@@ -7,7 +7,7 @@ nocolor='\033[0m'
 
 # Define Android NDK version and download URL
 ndkdir="android-ndk-r30-beta1"
-#ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
+ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
 sdkver="34"
 
 # Define Mesa version and download URL
@@ -63,13 +63,13 @@ echo "Creating and entering the work directory..." $'\n'
 mkdir -p "$workdir" && cd "$_"
 
 # Download Android NDK
-#echo "Downloading Android NDK..." $'\n'
-#curl $ndkver --output "$ndkdir".zip &> /dev/null
+echo "Downloading Android NDK..." $'\n'
+curl $ndkver --output "$ndkdir".zip &> /dev/null
 
-c#lear
+clear
 
-#echo "Extracting Android NDK..." $'\n'
-#unzip "$ndkdir".zip &> /dev/null
+echo "Extracting Android NDK..." $'\n'
+unzip "$ndkdir".zip &> /dev/null
 
 # Download Mesa source
 echo "Downloading Latest Mesa source ..." $'\n'
@@ -79,7 +79,7 @@ echo "Downloading Latest Mesa source ..." $'\n'
 
 #echo "Extracting Mesa source..." $'\n'
 #unzip "$mesadir".zip &> /dev/null
-git clone $mesasrc $mesadir
+git clone $mesasrc $mesadir &> /dev/null
 cd $mesadir
 
 # Set NDK Clang bin directory
