@@ -1,94 +1,101 @@
+# Mesa Turnip for Adreno 8XX (main branch)
 
-<div align="right">
-  <details>
-    <summary >🌐 Language</summary>
-    <div>
-      <div align="center">
-        <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=en">English</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=zh-CN">简体中文</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=zh-TW">繁體中文</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=ja">日本語</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=ko">한국어</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=hi">हिन्दी</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=th">ไทย</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=fr">Français</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=de">Deutsch</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=es">Español</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=it">Italiano</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=ru">Русский</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=pt">Português</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=nl">Nederlands</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=pl">Polski</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=ar">العربية</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=fa">فارسی</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=tr">Türkçe</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=vi">Tiếng Việt</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=id">Bahasa Indonesia</a>
-        | <a href="https://openaitx.github.io/view.html?user=v3kt0r-87&project=Mesa-Turnip-Builder&lang=as">অসমীয়া</
-      </div>
-    </div>
-  </details>
-</div>
+Модифицированная сборка Mesa Turnip с улучшенной поддержкой **Adreno 8XX**
 
-# Freedreno Turnip Builder 
+Цель проекта — улучшить стабильность и совместимость Turnip на Adreno 8XX,  
+где стандартный freedreno пока не обеспечивает полноценную работу.
 
-## Stable / RC Mesa  + Android NDK <br> Use this build for stability ✅ 
+---
 
-Simple Bash script that aims to build a turnip driver for **MAGISK/KERNELSU or EMULATOR**
+## 🔥 О проекте
 
-# What's New : 🔥
+Этот репозиторий основан на:
+- https://github.com/whitebelyash/mesa-tu8  
+- https://github.com/whitebelyash/freedreno_turnip-Cl  
 
-**[Click Here](//github.com/v3kt0r-87/Mesa-Turnip-Builder/blob/main/UPDATES.md)**
- 
-## How to Build Locally 🤔
+Ветка **whitebelyash/gen8** уже содержит базовую поддержку Adreno 8XX.  
+Моя задача — улучшить стабильность, исправить проблемы рендера и адаптировать драйвер под реальные устройства.
 
-Simply clone this repo and use **BASH** to build 
+Это **неофициальный форк**, созданный энтузиастом.  
+Код может содержать экспериментальные изменения.
 
-``` 
-bash build-turnip.sh
-``` 
+---
 
-Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#notes-) Section below for more info 
+## ⚠️ Статус
 
-# App Compatibility
+**Активная разработка.**
 
-| Name                                            | Status | Notes                                                                                                                     |
-|-------------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
-| 3D Mark                                         | ✅     |                                                                                                                           |
-| GRID™ Autosport                                 | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.(60fps)                                                          |
-| SpongeBob SquarePants Battle For Bikini Bottom  | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,(30 - 45 fps)                                                    |
-| Carx Street                                     | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,(30 - 45 fps)                                                    |
-| Dolphin Emulator                                | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
-| PPSSPP                                          | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
-| EggNS                                           | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
-| ANGLE (com.android.angle)                       | ✅     |                                                                                                                           |
-| GTA Triology-Definitive Edition                 | ✅     | Tested by [@Ryder_7777](//t.me/Ryder_7777)<br>Working,Poor Performance.                                                   |
-| Call of Duty WarZone Mobile                     | ✅     | Tested by [@SeniorFurry](//t.me/SeniorFurry)<br>Working,Texture Bugs,Poor Performance.                                    |
-| Hitman Blood Money : Reprisal                   | ✅     | Tested by [@V3KT0R-87](//github.com/V3KT0R-87)<br>Working, 60 fps Medium Graphics.                                        |
+- Возможны баги  
+- Возможны падения FPS  
+- Возможны артефакты  
+- Возможны проблемы с конкретными играми  
+- Ничего не гарантируется  
 
+Это просто попытка (возможно неудачная 🙂) 
 
-### NOTES :
+---
 
-### Important : Android 15 (SDK 35) is needed for Full Vulkan 1.4 support
+## ✔ Поддерживаемые GPU
 
-## Please use Ubuntu 24.04 or any other distro based on it
+| GPU | Статус |
+|-----|--------|
+| **Adreno 810** | Полностью поддерживается |
+| Adreno 830 | Может работать |
+| Adreno 840 | Может работать  |
+| Adreno 829 / 825 | может работать|
 
-**MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING**
+---
 
-**USE A VPN IF YOUR ISP THROTTLES YOUR SPEED**
+## ✔ Тестирование проходит на реальном устройстве (Realme p3 5g)
 
-Make sure your Android version is ``14`` or above otherwise you wont be able to install 
+Использовался Winlator **Ludashi**, так как официальный Winlator может не запускать игры.
 
-Make sure you have the latest **MAGISK / KERNELSU** before installing
+---
 
+## ❗ Важно
 
-# CREDITS 🙏
+Если у вас:
+- 0 FPS  
+- игра не запускается  
+- Winlator показывает 0 Vulkan Extensions  
+- чёрный экран  
+- вылет при запуске  
 
-### This project wont be possible without the help of these amazing people below :
- 
- **[@MrMiy4mo](//github.com/ilhan-athn7)** for creating the turnip build script and letting me modify and learn from it. 
- 
- **[@Mesa3D Team](//gitlab.freedesktop.org/mesa/mesa)** for giving us such amazing drivers so that we can further improve our device performance.
+Это **не обязательно проблема драйвера**.
 
- **[Adreno Driver Support Group](//t.me/adreno_driver)** for testing and sharing benchmarks.
+Чаще всего виноваты:
+- официальный Winlator  
+- неправильный DXVK  
+- кривой контейнер  
+- неправильные настройки Wine  
 
+---
+
+## 📝 Если что‑то не работает
+
+Пожалуйста, приложите лог:
+
+1. В Winlator включите **Enable Wine Debug**  
+2. Запустите игру  
+3. После вылета откройте:  
+   `Sdcard/winlator/logs`  
+4. Прикрепите последний `.log` файл
+
+Без лога невозможно понять причину.
+
+---
+
+## 📌 Примечание
+
+Этот проект создан энтузиастом и не связан с Mesa, Qualcomm или Winlator.  
+Не отправляйте баг‑репорты в официальные репозитории Mesa — это неофициальная сборка.
+
+---
+
+## ❤️ Благодарности
+
+- whitebelyash — за основу TU8 и поддержку gen8  
+- Freedreno/Mesa команде — за открытый драйвер  
+- Сообществу Adreno 8XX — за тестирование и обратную связь  
+
+---
