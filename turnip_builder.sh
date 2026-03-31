@@ -11,7 +11,7 @@ workdir="$(pwd)/turnip_workdir"
 ndkver="android-ndk-r29"
 ndk="$workdir/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 sdkver="34"
-mesasrc="https://github.com/Tornado6896/mesa2603.git"
+mesasrc="https://github.com/Tornado6896/mesa-a825.git"
 srcfolder="A825"
 
 clear
