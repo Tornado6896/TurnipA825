@@ -154,7 +154,7 @@ EOF
 }
 EOF
 	# ИСПРАВЛЕНО: имя архива совпадает с ожидаемым в YAML
-	zip /tmp/A825_T-V$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
+	zip $workdir/A825_T-V$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
 	cd -
 	
 	if [ -f $workdir/A825_T-V$BUILD_VERSION.zip ]; then
