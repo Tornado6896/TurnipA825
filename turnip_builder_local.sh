@@ -157,8 +157,8 @@ EOF
 	zip /tmp/A825_T-V$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
 	cd -
 	
-	if [ -f /tmp/A825_T-V$BUILD_VERSION.zip ]; then
-		echo -e "$green Архив успешно создан: /tmp/A825_T-V$BUILD_VERSION.zip $nocolor"
+	if [ -f $workdir/A825_T-V$BUILD_VERSION.zip ]; then
+		echo -e "$green Архив успешно создан: $workdir/A825_T-V$BUILD_VERSION.zip $nocolor"
 	else
 		echo -e "$red Не удалось упаковать архив! $nocolor"
 	fi
