@@ -55,7 +55,7 @@ prepare_workdir(){
 	#unzip -q "$ndkver"-linux.zip &> /dev/null
 
 	echo "Клонирование исходного кода Mesa..."
-	git clone $mesasrc --depth=1 --no-single-branch $srcfolder
+	git clone --branch A825 --depth=1 $mesasrc $srcfolder
 	cd $srcfolder
 	
 	echo "Запись версии TU..."
@@ -64,7 +64,6 @@ prepare_workdir(){
 
 build_lib_for_android(){
 	echo "==== Сборка Mesa на ветке $1 ===="
-	#git checkout origin/$1
 
 	mkdir -p "$workdir/bin"
 	ln -sf "$ndk/clang" "$workdir/bin/cc"
@@ -128,7 +127,6 @@ EOF
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
 		-Degl=disabled \
-		-Dplatform-sdk-version=31 \
 		-Dandroid-libbacktrace=disabled \
 		--reconfigure
 
