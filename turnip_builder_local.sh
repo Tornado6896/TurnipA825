@@ -23,8 +23,8 @@ declare -A BRANCHES=(
 show_menu() {
     echo "Доступные ветки для сборки драйвера:"
     for key in "${!BRANCHES[@]}"; do
-        echo "$key: ${BRANCHES[$key]}"
-    done
+        echo "$key ${BRANCHES[$key]}"
+    done | sort -k1 -n
 }
 
 # Функция выбора ветки
@@ -69,7 +69,7 @@ read -p "Введите номер сборки: " BUILD_VERSION
 clear
 
 run_all(){
-	echo "====== Начало сборки TU V-$BUILD_VERSION! ======"
+	echo "====== Начало сборки TU v-$BUILD_VERSION ! ======"
 	check_deps
 	prepare_workdir
 	build_lib_for_android $srcfolder
@@ -192,7 +192,7 @@ EOF
 	cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
-  "name": "$srcfolder T-$BUILD_VERSION",
+  "name": "$srcfolder turnip-v$BUILD_VERSION",
   "description": "Сборка для Adreno $srcfolder. Ветка: $srcfolder",
   "author": "Tornado6896",
   "packageVersion": "1",
@@ -202,11 +202,11 @@ EOF
   "libraryName": "libvulkan_freedreno.so"
 }
 EOF
-	zip $workdir/$srcfolder"_T-"$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
+	zip $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
 	cd -
 	
-	if [ -f $workdir/$srcfolder"_T-V"$BUILD_VERSION.zip ]; then
-		echo -e "$green Архив успешно создан: $workdir/$srcfolder"_T-V"$BUILD_VERSION.zip $nocolor"
+	if [ -f $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip ]; then
+		echo -e "$green Архив успешно создан: $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip $nocolor"
 	else
 		echo -e "$red Не удалось упаковать архив! $nocolor"
 	fi
