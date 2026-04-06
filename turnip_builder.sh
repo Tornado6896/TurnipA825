@@ -170,19 +170,17 @@ EOF
 		-Db_lto=false \
 		-Dstrip=true \
 		-Dplatforms=android \
-		-Dvideo-codecs=all\
+		-Dvideo-codecs= \
 		-Dplatform-sdk-version="$sdkver" \
 		-Dandroid-stub=true \
-		-Dgallium-drivers=zink \
+		-Dgallium-drivers= \
 		-Dvulkan-drivers=freedreno \
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
-		-Degl=enabled \
+		-Degl=disabled \
 		-Dperfetto=true \
-		-Dandroid-libbacktrace=enabled \
-		-D_libdrm=disabled \
+		-Dandroid-libbacktrace=disabled \
 		--reconfigure
-	
 
 	echo "Компиляция через Ninja (это займет время)..."
 	ninja -C build-android-aarch64 install
