@@ -61,30 +61,30 @@ clear
 
 run_all(){
 	echo "====== Начало сборки TU v$BUILD_VERSION ! ======"
-	#check_deps
+	check_deps
 	prepare_workdir
 	build_lib_for_android $srcfolder
 }
 
-# check_deps(){
-# 	echo "Проверка системных зависимостей..."
-# 	for deps_chk in $deps; do
-# 		sleep 0.1
-# 		if command -v "$deps_chk" >/dev/null 2>&1 ; then
-# 			echo -e "$green - $deps_chk найдено $nocolor"
-# 		else
-# 			echo -e "$red - $deps_chk НЕ найдено, продолжение невозможно. $nocolor"
-# 			deps_missing=1
-# 		fi
-# 	done
+check_deps(){
+	echo "Проверка системных зависимостей..."
+	for deps_chk in $deps; do
+		sleep 0.1
+		if command -v "$deps_chk" >/dev/null 2>&1 ; then
+ 			echo -e "$green - $deps_chk найдено $nocolor"
+ 		else
+			echo -e "$red - $deps_chk НЕ найдено, продолжение невозможно. $nocolor"
+ 			deps_missing=1
+ 		fi
+ 	done
 
-# 	if [ "$deps_missing" == "1" ]; then 
-# 		echo "Пожалуйста, установите недостающие пакеты." && exit 1
-# 	fi
+ 	if [ "$deps_missing" == "1" ]; then 
+ 		echo "Пожалуйста, установите недостающие пакеты." && exit 1
+ 	fi
 
-# 	echo "Установка зависимости python Mako..."
-# 	pip install mako &> /dev/null
-# }
+ 	echo "Установка зависимости python Mako..."
+ 	pip install mako &> /dev/null
+ }
 
 prepare_workdir(){
 	echo "Подготовка рабочей директории..."
@@ -96,7 +96,8 @@ prepare_workdir(){
 	#unzip -q "$ndkver"-linux.zip &> /dev/null
 
 	echo "Клонирование исходного кода Mesa..."
-	git clone --branch $srcfolder --depth=1 $mesasrc $srcfolder
+	#git clone --branch $srcfolder --depth=1 $mesasrc $srcfolder
+	git clone --branch $srcfolder $mesasrc $srcfolder
 	cd $srcfolder
 	
 	echo "Запись версии TU..."
