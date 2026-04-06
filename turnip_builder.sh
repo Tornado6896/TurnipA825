@@ -4,23 +4,75 @@
 green='\033[0;32m'
 red='\033[0;31m'
 nocolor='\033[0m'
-
+export branch_name
 # Список необходимых зависимостей
 deps="git meson ninja patchelf unzip curl pip flex bison zip glslang glslangValidator"
-workdir="$(pwd)/turnip_workdir"
-ndkver="android-ndk-r29"
-ndk="$workdir/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
-sdkver="34"
-mesasrc="https://github.com/Tornado6896/mesa-a825.git"
-srcfolder="A825"
+workdir="$(pwd)"
+ndkver="android-ndk-r30-beta1"
+ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
+sdkver="35"
+mesasrc="https://github.com/Tornado6896/mesa-tu8.git"
+srcfolder="$branch_name"
+
+declare -A BRANCHES=(
+    [1]="a825"
+    [2]="a829"
+)
+
+# Функция отображения меню
+show_menu() {
+    echo "Доступные ветки для сборки драйвера:"
+    for key in "${!BRANCHES[@]}"; do
+        echo "$key ${BRANCHES[$key]}"
+    done | sort -k1 -n
+}
+
+# Функция выбора ветки
+choose_branch() {
+    local branch_name=""
+    while [[ -z "$branch_name" ]]; do
+        show_menu
+        read -p "Введите номер или название ветки: " choice
+
+        # Проверка, является ли ввод номером
+        if [[ "$choice" =~ ^[0-9]+$ ]] && [[ -n "${BRANCHES[$choice]}" ]]; then
+            branch_name="${BRANCHES[$choice]}"
+        # Проверка, является ли ввод названием ветки
+        elif [[ "$choice" == "a825" || "$choice" == "a829" ]]; then
+            branch_name="$choice"
+        else
+            echo "Ошибка: неверный выбор. Пожалуйста, введите 1, 2, 825 или 829."
+            echo
+        fi
+    done
+
+    echo "Вы выбрали ветку: $branch_name"
+	
+	# read -p "Подтвердите выбор (y/n): " confirm
+    # if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+    #     echo "Выход."
+    #     exit 0
+    # fi 
+	
+#SELECTED_BRANCH="$branch_name"
+srcfolder="$branch_name"
+   # echo "Переменная SELECTED_BRANCH установлена в '$SELECTED_BRANCH'"
+}
+
+# Запуск выбора
+choose_branch
+    # Экспортируем переменную для использования в других скриптах
+
+
+read -p "Введите номер сборки: " BUILD_VERSION
 
 clear
 
 run_all(){
-	echo "====== Начало сборки TU V$BUILD_VERSION! ======"
+	echo "====== Начало сборки TU v-$BUILD_VERSION ! ======"
 	check_deps
 	prepare_workdir
-	build_lib_for_android A825
+	build_lib_for_android $srcfolder
 }
 
 check_deps(){
@@ -47,24 +99,23 @@ prepare_workdir(){
 	echo "Подготовка рабочей директории..."
 	mkdir -p "$workdir" && cd "$workdir"
 
-	echo "Загрузка Android NDK r29..."
-	curl -L https://dl.google.com/android/repository/"$ndkver"-linux.zip --output "$ndkver"-linux.zip &> /dev/null
-	echo "Распаковка NDK..."
-	unzip -q "$ndkver"-linux.zip &> /dev/null
+	#echo "Загрузка Android NDK r31..."
+	#curl -L https://dl.google.com/android/repository/"$ndkver"-linux.zip --output "$ndkver"-linux.zip &> /dev/null
+	#echo "Распаковка NDK..."
+	#unzip -q "$ndkver"-linux.zip &> /dev/null
 
 	echo "Клонирование исходного кода Mesa..."
-	git clone $mesasrc --depth=1 --no-single-branch $srcfolder
+	rm -rf $srcfolder
+	git clone --branch $srcfolder --depth=1 $mesasrc $srcfolder
 	cd $srcfolder
 	
 	echo "Запись версии TU..."
-	echo "#define TUGEN8_DRV_VERSION \"v$BUILD_VERSION\"" > ./src/freedreno/vulkan/tu_version.h
+	echo "#define TUGEN8_DRV_VERSION \"v $BUILD_VERSION\"" > ./src/freedreno/vulkan/tu_version.h
 }
 
 build_lib_for_android(){
-	echo "==== Сборка Mesa на ветке $1 ===="
-	git checkout origin/$1
+	echo "==== Сборка Mesa на ветке $srcfolder ===="
 
-	# Настройка окружения для использования Clang из NDK
 	mkdir -p "$workdir/bin"
 	ln -sf "$ndk/clang" "$workdir/bin/cc"
 	ln -sf "$ndk/clang++" "$workdir/bin/c++"
@@ -114,7 +165,7 @@ EOF
 	meson setup build-android-aarch64 \
 		--cross-file "android-aarch64.txt" \
 		--native-file "native.txt" \
-		--prefix /tmp/turnip-$1 \
+		--prefix /tmp/turnip-$srcfolder \
 		-Dbuildtype=release \
 		-Db_lto=false \
 		-Dstrip=true \
@@ -127,25 +178,25 @@ EOF
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
 		-Degl=disabled \
-		-Dplatform-sdk-version=36 \
+		-Dperfetto=true \
 		-Dandroid-libbacktrace=disabled \
 		--reconfigure
 
 	echo "Компиляция через Ninja (это займет время)..."
 	ninja -C build-android-aarch64 install
 
-	if [ ! -f /tmp/turnip-$1/lib/libvulkan_freedreno.so ]; then
+	if [ ! -f /tmp/turnip-$srcfolder/lib/libvulkan_freedreno.so ]; then
 		echo -e "$red Ошибка сборки! Библиотека .so не найдена. $nocolor" && exit 1
 	fi
 
 	echo "Создание архива с драйвером..."
-	cd /tmp/turnip-$1/lib
+	cd /tmp/turnip-$srcfolder/lib
 	cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
-  "name": "A8XX T-$BUILD_VERSION",
-  "description": "Сборка для Adreno 825. Ветка: $1",
-  "author": "whitebelyash / DVD_Disk / Tornado6896",
+  "name": "$srcfolder turnip-v$BUILD_VERSION",
+  "description": "Сборка для Adreno $srcfolder. Ветка: $srcfolder",
+  "author": "Tornado6896",
   "packageVersion": "1",
   "vendor": "Mesa",
   "driverVersion": "Vulkan 1.4.335",
@@ -153,12 +204,11 @@ EOF
   "libraryName": "libvulkan_freedreno.so"
 }
 EOF
-	# ИСПРАВЛЕНО: имя архива совпадает с ожидаемым в YAML
-	zip /tmp/A825_T-V$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
+	zip $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
 	cd -
 	
-	if [ -f /tmp/A825_T-V$BUILD_VERSION.zip ]; then
-		echo -e "$green Архив успешно создан: /tmp/A825_T-V$BUILD_VERSION.zip $nocolor"
+	if [ -f $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip ]; then
+		echo -e "$green Архив успешно создан: $workdir/$srcfolder"-turnip-v"$BUILD_VERSION.zip $nocolor"
 	else
 		echo -e "$red Не удалось упаковать архив! $nocolor"
 	fi
