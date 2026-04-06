@@ -96,8 +96,8 @@ prepare_workdir(){
 	#unzip -q "$ndkver"-linux.zip &> /dev/null
 
 	echo "Клонирование исходного кода Mesa..."
-	#git clone --branch $srcfolder --depth=1 $mesasrc $srcfolder
-	git clone --branch $srcfolder $mesasrc $srcfolder
+	git clone --branch $mesasrc $srcfolder --depth=1 $srcfolder
+	#git clone --branch $srcfolder $mesasrc $srcfolder
 	cd $srcfolder
 	
 	echo "Запись версии TU..."
