@@ -102,7 +102,7 @@ prepare_workdir(){
 	# cd $srcfolder
 
 	rm -rf "$srcfolder"
-    git clone --branch "$srcfolder" --depth 1 "$mesasrc" "$srcfolder
+    git clone --branch "$srcfolder" --depth 1 "$mesasrc" "$srcfolder"
     cd "$srcfolder"
 	
 	echo "Запись версии TU..."
