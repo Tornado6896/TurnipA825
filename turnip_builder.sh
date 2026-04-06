@@ -167,7 +167,7 @@ EOF
 		--native-file "native.txt" \
 		--prefix /tmp/turnip-$srcfolder \
 		-Dbuildtype=release \
-		-Db_lto=false \
+		-Db_lto=true \
 		-Dstrip=true \
 		-Dplatforms=android \
 		-Dvideo-codecs=all\
