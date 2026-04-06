@@ -60,31 +60,31 @@ read -p "Введите номер сборки: " BUILD_VERSION
 clear
 
 run_all(){
-	echo "====== Начало сборки TU v-$BUILD_VERSION ! ======"
+	echo "====== Начало сборки TU v$BUILD_VERSION ! ======"
 	#check_deps
 	prepare_workdir
 	build_lib_for_android $srcfolder
 }
 
-check_deps(){
-	echo "Проверка системных зависимостей..."
-	for deps_chk in $deps; do
-		sleep 0.1
-		if command -v "$deps_chk" >/dev/null 2>&1 ; then
-			echo -e "$green - $deps_chk найдено $nocolor"
-		else
-			echo -e "$red - $deps_chk НЕ найдено, продолжение невозможно. $nocolor"
-			deps_missing=1
-		fi
-	done
+# check_deps(){
+# 	echo "Проверка системных зависимостей..."
+# 	for deps_chk in $deps; do
+# 		sleep 0.1
+# 		if command -v "$deps_chk" >/dev/null 2>&1 ; then
+# 			echo -e "$green - $deps_chk найдено $nocolor"
+# 		else
+# 			echo -e "$red - $deps_chk НЕ найдено, продолжение невозможно. $nocolor"
+# 			deps_missing=1
+# 		fi
+# 	done
 
-	if [ "$deps_missing" == "1" ]; then 
-		echo "Пожалуйста, установите недостающие пакеты." && exit 1
-	fi
+# 	if [ "$deps_missing" == "1" ]; then 
+# 		echo "Пожалуйста, установите недостающие пакеты." && exit 1
+# 	fi
 
-	echo "Установка зависимости python Mako..."
-	pip install mako &> /dev/null
-}
+# 	echo "Установка зависимости python Mako..."
+# 	pip install mako &> /dev/null
+# }
 
 prepare_workdir(){
 	echo "Подготовка рабочей директории..."
@@ -100,7 +100,7 @@ prepare_workdir(){
 	cd $srcfolder
 	
 	echo "Запись версии TU..."
-	echo "#define TUGEN8_DRV_VERSION \"v-$BUILD_VERSION\"" > ./src/freedreno/vulkan/tu_version.h
+	echo "#define TUGEN8_DRV_VERSION \"v$BUILD_VERSION\"" > ./src/freedreno/vulkan/tu_version.h
 }
 
 build_lib_for_android(){
