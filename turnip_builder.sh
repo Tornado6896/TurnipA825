@@ -170,15 +170,14 @@ EOF
 		-Db_lto=false \
 		-Dstrip=true \
 		-Dplatforms=android \
-		-Dvideo-codecs=all \
+		-Dvideo-codecs= \
 		-Dplatform-sdk-version="$sdkver" \
 		-Dandroid-stub=true \
-		-Dgallium-drivers= freedreno\
+		-Dgallium-drivers= \
 		-Dvulkan-drivers=freedreno \
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
 		-Degl=disabled \
-		-Dperfetto=true \
 		-Dandroid-libbacktrace=disabled \
 		--reconfigure
 
@@ -198,7 +197,7 @@ EOF
 	cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
-  "name": "Turnip $BUILD_VERSION",
+  "name": "Turnip $srcfolder $BUILD_VERSION",
   "description": "Turnip $srcfolder $BUILD_VERSION",
   "author": "Tornado6896",
   "packageVersion": "1",
