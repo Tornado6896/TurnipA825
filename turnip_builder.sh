@@ -204,7 +204,7 @@ EOF
 {
   "schemaVersion": 1,
   "name": "Turnip Adreno $BUILD_VERSION",
-  "description": "Adreno $srcfolder $UILD_VERSION",
+  "description": "Adreno $srcfolder $BUILD_VERSION",
   "author": "Tornado6896",
   "packageVersion": "1",
   "vendor": "Mesa",
