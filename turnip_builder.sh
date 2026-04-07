@@ -165,7 +165,7 @@ EOF
 	meson setup build-android-aarch64 \
 		--cross-file "android-aarch64.txt" \
 		--native-file "native.txt" \
-		--prefix /tmp/Turnip Adreno $srcfolder \
+		--prefix /tmp/Turnip $srcfolder \
 		-Dbuildtype=release \
 		-Db_lto=true \
 		-Dstrip=true \
@@ -192,17 +192,17 @@ EOF
 	echo "Компиляция через Ninja (это займет время)..."
 	ninja -C build-android-aarch64 install
 
-	if [ ! -f /tmp/Turnip Adreno $srcfolder/lib/libvulkan_freedreno.so ]; then
+	if [ ! -f /tmp/Turnip $srcfolder/lib/libvulkan_freedreno.so ]; then
 		echo -e "$red Ошибка сборки! Библиотека .so не найдена. $nocolor" && exit 1
 	fi
 
 	echo "Создание архива с драйвером..."
-	cd /tmp/Turnip Adreno $srcfolder/lib
+	cd /tmp/Turnip $srcfolder/lib
 	cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
-  "name": "Turnip Adreno $BUILD_VERSION",
-  "description": "Adreno $srcfolder $BUILD_VERSION",
+  "name": "Turnip $BUILD_VERSION",
+  "description": "Turnip $srcfolder $BUILD_VERSION",
   "author": "Tornado6896",
   "packageVersion": "1",
   "vendor": "Mesa",
@@ -211,11 +211,11 @@ EOF
   "libraryName": "libvulkan_freedreno.so"
 }
 EOF
-	zip $workdir/$srcfolder" Turnip Adreno "$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
+	zip $workdir/$srcfolder" Turnip "$BUILD_VERSION.zip libvulkan_freedreno.so meta.json
 	cd -
 	
-	if [ -f $workdir/$srcfolder" Turnip Adreno "$BUILD_VERSION.zip ]; then
-		echo -e "$green Архив успешно создан: $workdir/$srcfolder" Turnip Adreno "$BUILD_VERSION.zip $nocolor"
+	if [ -f $workdir/$srcfolder" Turnip "$BUILD_VERSION.zip ]; then
+		echo -e "$green Архив успешно создан: $workdir/$srcfolder" Turnip "$BUILD_VERSION.zip $nocolor"
 	else
 		echo -e "$red Не удалось упаковать архив! $nocolor"
 	fi
