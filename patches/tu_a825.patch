@@ -17,7 +17,6 @@ index 1234567..abcdefg 100644
 --- a/src/freedreno/common/freedreno_devices.py
 +++ b/src/freedreno/common/freedreno_devices.py
 @@ -2000,0 +2000,150 @@
- )
 +
 + # ----------------------------------------------------------------------
 + # БАЗОВАЯ КОНФИГУРАЦИЯ ДЛЯ A8XX (LRZ отключён, предзагрузка включена)
