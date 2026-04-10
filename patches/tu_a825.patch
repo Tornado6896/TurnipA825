@@ -8,9 +8,9 @@ generator.
 
 Signed-off-by: User <user@example.com>
 ---
- src/freedreno/common/freedreno_devices.py | 149 +++++++++++++++++++++++
+ src/freedreno/common/freedreno_devices.py | 150 +++++++++++++++++++++++
  src/freedreno/drm-shim/freedreno_noop.c   |  5 +++
- 2 files changed, 154 insertions(+)
+ 2 files changed, 155 insertions(+)
 
 diff --git a/src/freedreno/common/freedreno_devices.py b/src/freedreno/common/freedreno_devices.py
 index 1234567..abcdefg 100644
