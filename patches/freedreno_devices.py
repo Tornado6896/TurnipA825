@@ -1526,7 +1526,7 @@ a825_base = GPUProps(
 # КОНФИГУРАЦИЯ ДЛЯ A825
 # ----------------------------------------------------------------------
 a825 = GPUProps(
-        gmem_size = 2 * 1024 * 1024,
+        # gmem_size = 2 * 1024 * 1024,
         gmem_ccu_color_cache_fraction = CCUColorCacheFraction.HALF.value,
         gmem_per_ccu_color_cache_size = 128 * 1024,
         gmem_ccu_depth_cache_fraction = CCUColorCacheFraction.HALF.value,
