@@ -8,16 +8,15 @@ generator.
 
 Signed-off-by: User <user@example.com>
 ---
- src/freedreno/common/freedreno_devices.py | 150 +++++++++++++++++++++++
+ src/freedreno/common/freedreno_devices.py | 148 +++++++++++++++++++++++
  src/freedreno/drm-shim/freedreno_noop.c   |  5 +++
- 2 files changed, 155 insertions(+)
+ 2 files changed, 153 insertions(+)
 
 diff --git a/src/freedreno/common/freedreno_devices.py b/src/freedreno/common/freedreno_devices.py
 index 1234567..abcdefg 100644
 --- a/src/freedreno/common/freedreno_devices.py
 +++ b/src/freedreno/common/freedreno_devices.py
 @@ -1437,0 +1437,149 @@ ))
-
 + # ----------------------------------------------------------------------
 + # БАЗОВАЯ КОНФИГУРАЦИЯ ДЛЯ A8XX (LRZ отключён, предзагрузка включена)
 + # ----------------------------------------------------------------------
